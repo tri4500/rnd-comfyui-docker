@@ -7,7 +7,19 @@ FROM ubuntu:latest
 
 LABEL maintainer="code@yanwk.fun"
 
-RUN --mount=type=cache,target=/var/cache/apt apt-get update && apt-get install -y python3 python3-pip python3-wheel python3-setuptools python3-numpy shadow git aria2 libgl1-mesa-glx
+RUN --mount=type=cache,target=/var/cache/apt apt update
+
+RUN --mount=type=cache,target=/var/cache/apt apt install -y python3
+RUN --mount=type=cache,target=/var/cache/apt apt install -y python3-pip
+RUN --mount=type=cache,target=/var/cache/apt apt install -y python3-wheel
+RUN --mount=type=cache,target=/var/cache/apt apt install -y python3-setuptools
+RUN --mount=type=cache,target=/var/cache/apt apt install -y python3-numpy
+RUN --mount=type=cache,target=/var/cache/apt apt install -y shadow
+RUN --mount=type=cache,target=/var/cache/apt apt install -y git
+RUN --mount=type=cache,target=/var/cache/apt apt install -y aria2
+RUN --mount=type=cache,target=/var/cache/apt apt install -y libgl1-mesa-glx
+
+RUN --mount=type=cache,target=/var/cache/apt apt update
 
 # Install PyTorch (stable version)
 RUN --mount=type=cache,target=/root/.cache/pip pip3 install --no-cache-dir torch torchvision
