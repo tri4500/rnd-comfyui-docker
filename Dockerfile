@@ -17,8 +17,8 @@ RUN --mount=type=cache,target=/var/cache/apt apt update
 RUN --mount=type=cache,target=/var/cache/apt apt install -y python3-setuptools
 RUN --mount=type=cache,target=/var/cache/apt apt update
 RUN --mount=type=cache,target=/var/cache/apt apt install -y python3-numpy
-RUN --mount=type=cache,target=/var/cache/apt apt update
-RUN --mount=type=cache,target=/var/cache/apt apt install -y shadow
+# RUN --mount=type=cache,target=/var/cache/apt apt update
+# RUN --mount=type=cache,target=/var/cache/apt apt install -y shadow
 RUN --mount=type=cache,target=/var/cache/apt apt update
 RUN --mount=type=cache,target=/var/cache/apt apt install -y git
 RUN --mount=type=cache,target=/var/cache/apt apt update
