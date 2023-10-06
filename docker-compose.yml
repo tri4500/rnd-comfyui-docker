@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile
     image: "yanwk/comfyui-boot"
     user: "root"
-    volumes: 
+    volumes:
       - "./storage:/home/runner"
     command: "chown -R runner:runner /home/runner"
 
@@ -27,11 +27,11 @@ services:
     volumes:
       - "./storage:/home/runner"
     environment:
-      - CLI_ARGS=
+      - CLI_ARGS=--lowvram
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
-              device_ids: ['0']
+              device_ids: ["0"]
               capabilities: [gpu]
