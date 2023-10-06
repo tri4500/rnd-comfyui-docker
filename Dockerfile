@@ -7,19 +7,19 @@ FROM ubuntu:latest
 
 LABEL maintainer="code@yanwk.fun"
 
-RUN --mount=type=cache,target=/var/cache/apt apt update
+RUN --mount=type=cache,target=/var/cache/apt apt-get update
 
-RUN --mount=type=cache,target=/var/cache/apt apt install -y python3
-RUN --mount=type=cache,target=/var/cache/apt apt install -y python3-pip
-RUN --mount=type=cache,target=/var/cache/apt apt install -y python3-wheel
-RUN --mount=type=cache,target=/var/cache/apt apt install -y python3-setuptools
-RUN --mount=type=cache,target=/var/cache/apt apt install -y python3-numpy
-RUN --mount=type=cache,target=/var/cache/apt apt install -y shadow
-RUN --mount=type=cache,target=/var/cache/apt apt install -y git
-RUN --mount=type=cache,target=/var/cache/apt apt install -y aria2
-RUN --mount=type=cache,target=/var/cache/apt apt install -y libgl1-mesa-glx
+RUN --mount=type=cache,target=/var/cache/apt apt-get install -y python3
+RUN --mount=type=cache,target=/var/cache/apt apt-get install -y python3-pip
+RUN --mount=type=cache,target=/var/cache/apt apt-get install -y python3-wheel
+RUN --mount=type=cache,target=/var/cache/apt apt-get install -y python3-setuptools
+RUN --mount=type=cache,target=/var/cache/apt apt-get install -y python3-numpy
+RUN --mount=type=cache,target=/var/cache/apt apt-get install -y shadow
+RUN --mount=type=cache,target=/var/cache/apt apt-get install -y git
+RUN --mount=type=cache,target=/var/cache/apt apt-get install -y aria2
+RUN --mount=type=cache,target=/var/cache/apt apt-get install -y libgl1-mesa-glx
 
-RUN --mount=type=cache,target=/var/cache/apt apt update
+RUN --mount=type=cache,target=/var/cache/apt apt-get update
 
 # Install PyTorch (stable version)
 RUN --mount=type=cache,target=/root/.cache/pip pip3 install --no-cache-dir torch torchvision
