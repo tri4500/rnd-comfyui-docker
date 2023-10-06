@@ -3,40 +3,39 @@
 # A runtime environment for https://github.com/comfyanonymous/ComfyUI
 ################################################################################
 
-FROM opensuse/tumbleweed:latest
+FROM ubuntu:latest
 
 LABEL maintainer="code@yanwk.fun"
 
-RUN --mount=type=cache,target=/var/cache/zypp \
-    set -eu \
-    && zypper install --no-confirm \
-        python311 python311-pip \
-        python311-wheel python311-setuptools python311-numpy \
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get update && apt-get install -y \
+        python3 python3-pip \
+        python3-wheel python3-setuptools python3-numpy \
         shadow git aria2 \
-        Mesa-libGL1
+        libgl1-mesa-glx
 
 # Install PyTorch (stable version)
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --break-system-packages \
-        torch torchvision --index-url https://download.pytorch.org/whl/cu118
+    pip3 install --no-cache-dir \
+        torch torchvision
 
 # Install xFormers (stable version)
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --break-system-packages \
+    pip3 install --no-cache-dir \
         xformers
 
 # Deps for main app
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --break-system-packages \
+    pip3 install --no-cache-dir \
         -r https://raw.githubusercontent.com/comfyanonymous/ComfyUI/master/requirements.txt
 
 # Deps for ControlNet Auxiliary Preprocessors
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --break-system-packages \
+    pip3 install --no-cache-dir \
         -r https://raw.githubusercontent.com/Fannovel16/comfyui_controlnet_aux/main/requirements.txt
 
 # Fix for CuDNN
-ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/python3.11/site-packages/torch/lib"
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/python3.9/site-packages/torch/lib"
 
 # Create a low-privilege user.
 RUN printf 'CREATE_MAIL_SPOOL=no' > /etc/default/useradd \
